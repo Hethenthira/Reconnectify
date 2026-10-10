@@ -40,10 +40,17 @@ const Messages = () => {
   useEffect(() => {
     if (!isAuthenticated || !user) return;
 
-    const socket = io("http://localhost:5000", {
-      auth: { token: localStorage.getItem("token") },
-      transports: ["websocket"],
-    });
+const socket = io(
+  import.meta.env.VITE_API_URL
+    ? import.meta.env.VITE_API_URL.replace(/\/api$/, "")
+    : "http://localhost:5000",
+  {
+    auth: {
+      token: localStorage.getItem("token"),
+    },
+    transports: ["websocket"],
+  }
+);
 
     socketRef.current = socket;
 
