@@ -1,4 +1,4 @@
-const express = require('express');
+    const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config(); // Load environment variables if you have a .env file, otherwise we'll use defaults
@@ -12,6 +12,11 @@ app.use(express.json());
 // MongoDB Connection
 // Ideally, use process.env.MONGO_URI from a .env file
 const MONGO_URI = "mongodb+srv://angamuthutamilarasi4353_db_user:Rzr2y3UDuSSPLbY0@cluster0.muwqcy8.mongodb.net/reconnectify?appName=Cluster0";
+
+
+if (!MONGO_URI) {
+    throw new Error("MONGO_URI environment variable is missing");
+}
 
 mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
